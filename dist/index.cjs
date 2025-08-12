@@ -28837,11 +28837,11 @@ function run() {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    astrisClient = new AstrisClient(coreExports.getInput('lynqa-url'), coreExports.getInput('lynqa-api-key'));
-                    data = fs__namespace.readFileSync(coreExports.getInput('steps-file'), 'utf8');
+                    astrisClient = new AstrisClient(coreExports.getInput("test-runner-url"), coreExports.getInput("test-runner-api-key"));
+                    data = fs__namespace.readFileSync(coreExports.getInput("steps-file"), "utf8");
                     return [4 /*yield*/, astrisClient.addTestRun({
-                            url: coreExports.getInput('url'),
-                            steps: JSON.parse(data)
+                            url: coreExports.getInput("url"),
+                            steps: JSON.parse(data),
                         })];
                 case 1:
                     testRunId = _b.sent();
@@ -28864,7 +28864,7 @@ function run() {
                         coreExports.setFailed("[".concat(new Date().toISOString(), "] Test run failed"));
                     }
                     console.log("[".concat(new Date().toISOString(), "] Test run succeeded"));
-                    coreExports.setOutput('status', status_1);
+                    coreExports.setOutput("status", status_1);
                     return [2 /*return*/];
                 case 6: return [2 /*return*/];
             }

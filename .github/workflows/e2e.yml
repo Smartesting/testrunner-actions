@@ -12,7 +12,7 @@ jobs:
       - name: Run tests
         uses: ./
         with:
-          url: 'https://clark-smartesting.atlassian.net'
-          steps-file: 'ci/e2e.json'
+          url: "https://clark-smartesting.atlassian.net"
+          steps-file: "ci/e2e.json"
           test-runner-api-key: ${{ secrets.TEST_RUNNER_API_KEY }}
-          test-runner-url: 'https://api.testrunner.smartesting.com'
+          test-runner-url: "https://api.testrunner.smartesting.com"

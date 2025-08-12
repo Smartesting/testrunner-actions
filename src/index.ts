@@ -5,17 +5,17 @@ import { AstrisClient, IAstrisClient, RunStatus } from "@smartesting/astris";
 export async function run() {
   const astrisClient: IAstrisClient = new AstrisClient(
     core.getInput("test-runner-url"),
-    core.getInput("test-runner-api-key")
+    core.getInput("test-runner-api-key"),
   );
 
   const data = fs.readFileSync(core.getInput("steps-file"), "utf8");
   const testRunId = await astrisClient.addTestRun({
     url: core.getInput("url"),
-    steps: JSON.parse(data)
+    steps: JSON.parse(data),
   });
 
   console.log(
-    `[${new Date().toISOString()}] Test run created with ID: ${testRunId}`
+    `[${new Date().toISOString()}] Test run created with ID: ${testRunId}`,
   );
 
   while (true) {
@@ -24,7 +24,7 @@ export async function run() {
 
     if (status !== RunStatus.SUCCESS) {
       console.log(
-        `[${new Date().toISOString()}] Test run status: ${status} (step ${stepStatuses.filter((stepReport) => stepReport.end !== undefined).length + 1} on ${stepStatuses.length})`
+        `[${new Date().toISOString()}] Test run status: ${status} (step ${stepStatuses.filter((stepReport) => stepReport.end !== undefined).length + 1} on ${stepStatuses.length})`,
       );
     }
 
