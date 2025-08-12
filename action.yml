@@ -1,0 +1,29 @@
+name: Test runner
+description: Run a test with Smartesting test runner from GitHub Actions workflows
+author: Smartesting
+
+branding:
+  icon: play
+  color: green
+
+inputs:
+  test-runner-url:
+    description: URL of test runner API
+    required: true
+  test-runner-api-key:
+    description: Test runner API key
+    required: true
+  url:
+    description: URL of your system under test
+    required: true
+  steps-file:
+    description: File containing steps of the test
+    required: true
+
+outputs:
+  status:
+    description: Test execution status
+
+runs:
+  using: node20
+  main: dist/index.cjs

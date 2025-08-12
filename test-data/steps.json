@@ -1,0 +1,10 @@
+[
+  {
+    "action": "action 1",
+    "expectedResult": "assertion 1"
+  },
+  {
+    "action": "action 2",
+    "expectedResult": "assertion 2"
+  }
+]
