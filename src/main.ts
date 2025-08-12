@@ -5,13 +5,13 @@ import { AstrisClient, IAstrisClient, RunStatus } from "@smartesting/astris";
 export async function run() {
   const astrisClient: IAstrisClient = new AstrisClient(
     core.getInput("test-runner-url"),
-    core.getInput("test-runner-api-key")
+    core.getInput("test-runner-api-key"),
   );
 
   const data = fs.readFileSync(core.getInput("steps-file"), "utf8");
   const testRunId = await astrisClient.addTestRun({
     url: core.getInput("url"),
-    steps: JSON.parse(data)
+    steps: JSON.parse(data),
   });
 
   process.on("SIGINT", async () => {
@@ -25,29 +25,28 @@ export async function run() {
   });
 
   core.info(
-    `[${new Date().toISOString()}] Test run created with ID: ${testRunId}`
+    `[${new Date().toISOString()}] Test run created with ID: ${testRunId}`,
   );
 
   while (true) {
     const { status, stepStatuses } =
       await astrisClient.getTestRunFullStatus(testRunId);
 
-    if (status !== RunStatus.SUCCESS) {
-      core.info(
-        `[${new Date().toISOString()}] Test run status: ${status} (step ${stepStatuses.filter((stepReport) => stepReport.end !== undefined).length + 1} on ${stepStatuses.length})`
-      );
-    }
-
     if (status === RunStatus.RUNNING || status === RunStatus.WAITING) {
-      await sleep(2000);
+      core.info(
+        `[${new Date().toISOString()}] Test run status: ${status} (step ${stepStatuses.filter((stepReport) => stepReport.end !== undefined).length + 1} on ${stepStatuses.length})`,
+      );
+      await sleep(5000);
       continue;
     }
 
-    if (status !== RunStatus.SUCCESS) {
-      core.setFailed(`[${new Date().toISOString()}] Test run failed`);
+    if (status === RunStatus.SUCCESS) {
+      core.info(`[${new Date().toISOString()}] Test run succeeded`);
+    } else {
+      core.setFailed(
+        `[${new Date().toISOString()}] Test run finished with status ${status}`,
+      );
     }
-
-    core.info(`[${new Date().toISOString()}] Test run succeeded`);
     core.setOutput("status", status);
     return;
   }

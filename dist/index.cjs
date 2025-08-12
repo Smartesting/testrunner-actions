@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var require$$0 = require('os');
 var require$$0$1 = require('crypto');
 var require$$1 = require('fs');
@@ -28876,19 +28874,19 @@ function run() {
                     return [4 /*yield*/, astrisClient.getTestRunFullStatus(testRunId)];
                 case 3:
                     _a = _b.sent(), status_1 = _a.status, stepStatuses = _a.stepStatuses;
-                    if (status_1 !== RunStatus.SUCCESS) {
-                        coreExports.info("[".concat(new Date().toISOString(), "] Test run status: ").concat(status_1, " (step ").concat(stepStatuses.filter(function (stepReport) { return stepReport.end !== undefined; }).length + 1, " on ").concat(stepStatuses.length, ")"));
-                    }
                     if (!(status_1 === RunStatus.RUNNING || status_1 === RunStatus.WAITING)) return [3 /*break*/, 5];
-                    return [4 /*yield*/, sleep(2000)];
+                    coreExports.info("[".concat(new Date().toISOString(), "] Test run status: ").concat(status_1, " (step ").concat(stepStatuses.filter(function (stepReport) { return stepReport.end !== undefined; }).length + 1, " on ").concat(stepStatuses.length, ")"));
+                    return [4 /*yield*/, sleep(5000)];
                 case 4:
                     _b.sent();
                     return [3 /*break*/, 2];
                 case 5:
-                    if (status_1 !== RunStatus.SUCCESS) {
-                        coreExports.setFailed("[".concat(new Date().toISOString(), "] Test run failed"));
+                    if (status_1 === RunStatus.SUCCESS) {
+                        coreExports.info("[".concat(new Date().toISOString(), "] Test run succeeded"));
                     }
-                    coreExports.info("[".concat(new Date().toISOString(), "] Test run succeeded"));
+                    else {
+                        coreExports.setFailed("[".concat(new Date().toISOString(), "] Test run finished with status ").concat(status_1));
+                    }
                     coreExports.setOutput("status", status_1);
                     return [2 /*return*/];
                 case 6: return [2 /*return*/];
@@ -28899,6 +28897,5 @@ function run() {
 function sleep(ms) {
     return new Promise(function (resolve) { return setTimeout(resolve, ms); });
 }
-run();
 
-exports.run = run;
+void run();
