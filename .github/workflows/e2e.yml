@@ -15,4 +15,4 @@ jobs:
           url: 'https://clark-smartesting.atlassian.net'
           steps-file: 'ci/e2e.json'
           test-runner-api-key: ${{ secrets.CI_ASTRIS_API_KEY }}
-          test-runner-url: 'https://f141bc92-792e-495c-a7df-4b230b2997d6.pub.instances.scw.cloud'
+          test-runner-url: 'https://api.testrunner.smartesting.com'
