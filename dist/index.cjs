@@ -28834,6 +28834,7 @@ class AstrisClient {
 function run() {
     return __awaiter(this, void 0, void 0, function () {
         var astrisClient, data, testRunId, _a, status_1, stepStatuses;
+        var _this = this;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -28845,14 +28846,38 @@ function run() {
                         })];
                 case 1:
                     testRunId = _b.sent();
-                    console.log("[".concat(new Date().toISOString(), "] Test run created with ID: ").concat(testRunId));
+                    process.on("SIGINT", function () { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    coreExports.info("Stopping test ".concat(testRunId, "..."));
+                                    return [4 /*yield*/, astrisClient.stopTestRuns(testRunId)];
+                                case 1:
+                                    _a.sent();
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); });
+                    process.on("SIGTERM", function () { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    coreExports.info("Stopping test ".concat(testRunId, "..."));
+                                    return [4 /*yield*/, astrisClient.stopTestRuns(testRunId)];
+                                case 1:
+                                    _a.sent();
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); });
+                    coreExports.info("[".concat(new Date().toISOString(), "] Test run created with ID: ").concat(testRunId));
                     _b.label = 2;
                 case 2:
                     return [4 /*yield*/, astrisClient.getTestRunFullStatus(testRunId)];
                 case 3:
                     _a = _b.sent(), status_1 = _a.status, stepStatuses = _a.stepStatuses;
                     if (status_1 !== RunStatus.SUCCESS) {
-                        console.log("[".concat(new Date().toISOString(), "] Test run status: ").concat(status_1, " (step ").concat(stepStatuses.filter(function (stepReport) { return stepReport.end !== undefined; }).length + 1, " on ").concat(stepStatuses.length, ")"));
+                        coreExports.info("[".concat(new Date().toISOString(), "] Test run status: ").concat(status_1, " (step ").concat(stepStatuses.filter(function (stepReport) { return stepReport.end !== undefined; }).length + 1, " on ").concat(stepStatuses.length, ")"));
                     }
                     if (!(status_1 === RunStatus.RUNNING || status_1 === RunStatus.WAITING)) return [3 /*break*/, 5];
                     return [4 /*yield*/, sleep(2000)];
@@ -28863,7 +28888,7 @@ function run() {
                     if (status_1 !== RunStatus.SUCCESS) {
                         coreExports.setFailed("[".concat(new Date().toISOString(), "] Test run failed"));
                     }
-                    console.log("[".concat(new Date().toISOString(), "] Test run succeeded"));
+                    coreExports.info("[".concat(new Date().toISOString(), "] Test run succeeded"));
                     coreExports.setOutput("status", status_1);
                     return [2 /*return*/];
                 case 6: return [2 /*return*/];
