@@ -11,11 +11,14 @@ const config = {
     esModule: true,
     file: "dist/index.cjs",
     format: "cjs",
+    sourcemap: true,
   },
   plugins: [
     commonjs(),
     nodeResolve({ preferBuiltins: true }),
-    typescript(),
+    typescript({
+      exclude: ["**/*.test.ts"],
+    }),
     json(),
   ],
 };

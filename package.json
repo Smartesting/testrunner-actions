@@ -1,21 +1,10 @@
 {
-  "name": "javascript-action",
-  "description": "GitHub Actions JavaScript Template",
+  "name": "@smartesting/testrunner-actions",
+  "description": "GitHub Actions to run tests with Smartesting Test Runner",
   "version": "0.0.0",
-  "author": "",
+  "author": "Smartesting",
   "type": "module",
   "private": true,
-  "homepage": "https://github.com/actions/javascript-action#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
-  },
-  "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
-  },
-  "keywords": [
-    "actions"
-  ],
   "exports": {
     ".": "./dist/index.js"
   },
@@ -23,6 +12,8 @@
     "node": ">=20"
   },
   "scripts": {
+    "tsc:watch": "tsc --noEmit --watch",
+    "test": "jest",
     "bundle": "npm run format:write && npm run package",
     "format:write": "npx prettier --write .",
     "format:check": "npx prettier --check .",
@@ -45,6 +36,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-typescript": "^12.1.4",
+    "@types/jest": "^30.0.0",
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -54,7 +46,10 @@
     "make-coverage-badge": "^1.2.0",
     "prettier": "^3.6.2",
     "prettier-eslint": "^16.4.2",
-    "rollup": "^4.46.2"
+    "rollup": "^4.46.2",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "*"

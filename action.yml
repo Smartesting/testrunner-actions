@@ -1,5 +1,5 @@
 name: Smartesting Test runner
-description: Run a test with Smartesting test runner from GitHub Actions workflows
+description: Run tests with Smartesting Test Runner from GitHub Actions workflows
 author: Smartesting
 
 branding:
@@ -13,16 +13,13 @@ inputs:
   test-runner-api-key:
     description: Test runner API key
     required: true
-  url:
-    description: URL of your system under test
-    required: true
-  steps-file:
-    description: File containing steps of the test
+  directory:
+    description: Directory containing TestRunner test files (rec.)
     required: true
 
 outputs:
   status:
-    description: Test execution status
+    description: Test executions statuses
 
 runs:
   using: node20

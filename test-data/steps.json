@@ -1,10 +1,18 @@
-[
-  {
-    "action": "action 1",
-    "expectedResult": "assertion 1"
-  },
-  {
-    "action": "action 2",
-    "expectedResult": "assertion 2"
-  }
-]
+{
+  "url": "https://www.example.com",
+  "tests": [
+    {
+      "name": "Test name",
+      "steps": [
+        {
+          "action": "action 1",
+          "expectedResult": "assertion 1"
+        },
+        {
+          "action": "action 2",
+          "expectedResult": "assertion 2"
+        }
+      ]
+    }
+  ]
+}
