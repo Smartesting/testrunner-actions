@@ -13,6 +13,7 @@
   },
   "scripts": {
     "tsc:watch": "tsc --noEmit --watch",
+    "build": "tsc --noEmit",
     "test": "jest",
     "bundle": "npm run format:write && npm run package",
     "format:write": "npx prettier --write .",
