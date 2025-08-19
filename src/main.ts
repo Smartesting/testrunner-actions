@@ -22,7 +22,7 @@ export async function run() {
     core.setFailed(`No *.testrunner.json file found in ${directory}`);
     return;
   }
-  core.info(`Found *.testrunner.json files: ${files.join(", ")}`);
+  core.info(`Found ${files.length} files: ${files.join(", ")}`);
 
   let shouldStop = false;
   let currentRunId: Id | null = null;
