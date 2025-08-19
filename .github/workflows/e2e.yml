@@ -9,6 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Bundle
+        run: yarn package
+
       - name: Run tests
         uses: ./
         with:
